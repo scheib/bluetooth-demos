@@ -65,7 +65,7 @@
     <div class="container">
       <div class="icon-container">
         <iron-icon class="my-icon" icon="device:battery-std"></iron-icon>
-        <svg class="my-icon" viewBox="0 0 24 24">
+        <svg id="battery-level" class="my-icon" viewBox="0 0 24 24">
           <rect x="0" y="2" height="20" class="top-icon"/>
         </svg>
       </div>
@@ -73,6 +73,10 @@
     <paper-fab icon="cached"></paper-fab>
   </paper-scroll-header-panel>
   <script>
+  var battery_level = document.getElementById("battery-level");
+  var setBatteryLevel = function(level) {
+    battery_level.style.transform = "scaleY(" + (level[0]/100) + ")";
+  }
   var dev;
   var serv;
   var servi;
@@ -96,7 +100,10 @@
     }).then(function(characteristic) {
       char = characteristic;
       console.log(char);
-    });
+      return characteristic.readValue();
+    }).then(function(value) {
+      setBatteryLevel(new Uint8Array(value));
+    }).catch(console.log.bind(console));
   </script>
 </body>
 
