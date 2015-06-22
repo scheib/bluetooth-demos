@@ -13,11 +13,68 @@
 
   <link rel="stylesheet" href="styles/main.css">
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import"
+        href="bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html" rel="import">
+  <link rel="import" href="bower_components/iron-icons/device-icons.html" rel="import">
+  <link rel="import" href="bower_components/iron-icons/action-icons.html" rel="import">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html" rel="import">
+  <link rel="import" href="bower_components/iron-icon/iron-icon.html" rel="import">
+  <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 
+  <style is="custom-style">
+   paper-toolbar {
+     --paper-toolbar-background: #009688;
+   }
+   paper-fab {
+     --paper-fab-background: #00b8d4;
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+   }
+   .my-icon {
+     position: absolute;
+     --iron-icon-width: 100%;
+     --iron-icon-height: 100%;
+   }
+   .top-icon {
+     transition: transform .2s cubic-bezier(0.4, 0.0, 0.2, 1);
+     fill: white;
+     fill-opacity: 0.8;
+     width: 100%;
+   }
+   .container {
+     height: 100%;
+     @apply(--layout-vertical);
+     @apply(--layout-center);
+     @apply(--layout-center-justified);
+   }
+   .icon-container {
+     position: relative;
+     height: 300px;
+     width: 300px;
+   }
+  </style>
 </head>
 
 <body unresolved class="fullbleed layout vertical">
-  TEST
+  <paper-scroll-header-panel class="flex">
+    <paper-toolbar class="tall">
+      <div class="bottom title">Web Bluetooth Demos</div>
+    </paper-toolbar>
+    <div class="container">
+      <div class="icon-container">
+        <iron-icon class="my-icon" icon="device:battery-std"></iron-icon>
+        <svg class="my-icon" viewBox="0 0 24 24">
+          <rect x="0" y="2" height="20" class="top-icon"/>
+        </svg>
+      </div>
+    </div>
+    <paper-fab icon="cached"></paper-fab>
+  </paper-scroll-header-panel>
+  <script>
+  </script>
 </body>
 
 </html>
