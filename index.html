@@ -18,7 +18,6 @@
   <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="bower_components/iron-icons/iron-icons.html" rel="import">
   <link rel="import" href="bower_components/iron-icons/device-icons.html" rel="import">
-  <link rel="import" href="bower_components/iron-icons/action-icons.html" rel="import">
   <link rel="import" href="bower_components/paper-fab/paper-fab.html" rel="import">
   <link rel="import" href="bower_components/iron-icon/iron-icon.html" rel="import">
   <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
@@ -74,6 +73,29 @@
     <paper-fab icon="cached"></paper-fab>
   </paper-scroll-header-panel>
   <script>
+  var dev;
+  var serv;
+  var servi;
+  var char;
+  navigator.bluetooth.requestDevice({
+    filter: [{ services: ['battery_service'],
+      }]
+    }).then(function(device) {
+      dev = device;
+      console.log(dev);
+      return device.connectGATT();
+    }).then(function(server) {
+      serv = server;
+      console.log(serv);
+      return server.getPrimaryService('battery_service');
+    }).then(function(service) {
+      servi = service;
+      console.log(servi);
+      return service.getCharacteristic('battery_level');
+    }).then(function(characteristic) {
+      char = characteristic;
+      console.log(char);
+    });
   </script>
 </body>
 
