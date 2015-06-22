@@ -1,0 +1,20 @@
+{
+  "name": "bluetooth-demos",
+  "version": "0.0.0",
+  "homepage": "https://github.com/g-ortuno/bluetooth-demos",
+  "authors": [
+    "Giovanni Ortuño Urquidi <gd.ortuno@gmail.com>"
+  ],
+  "description": "Demos for Web Bluetooth",
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0"
+  }
+}
