@@ -78,7 +78,7 @@
   var servi;
   var char;
   navigator.bluetooth.requestDevice({
-    filter: [{ services: ['battery_service'],
+    filters: [{ services: ['battery_service'],
       }]
     }).then(function(device) {
       dev = device;
