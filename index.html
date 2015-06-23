@@ -31,7 +31,7 @@
      position: absolute;
      bottom: 20px;
      right: 20px;
-     transition: all 1;
+     transition: all 1s;
    }
    .my-icon {
      position: absolute;
@@ -82,6 +82,7 @@
   var serv;
   var servi;
   var char;
+  var temp = 0;
   console.log("Scanning for devices");
   navigator.bluetooth.requestDevice({
     filters: [{ services: ['battery_service'],
@@ -110,8 +111,11 @@
       setBatteryLevel(new Uint8Array(value));
     });
     var button = document.getElementById("refresh-button");
-    button.style.transform = "rotateZ(0deg)";
-    button.style.transform = "rotateZ(1080deg)";
+    if (temp % 2)
+      button.style.transform = "rotateZ(0deg)";
+    else
+      button.style.transform = "rotateZ(1080deg)";
+    temp++;
   }
   </script>
 </body>
