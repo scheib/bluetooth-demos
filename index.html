@@ -76,7 +76,7 @@
   <script>
   var battery_level = document.getElementById("battery-level");
   var setBatteryLevel = function(level) {
-    battery_level.style.transform = "scaleY(" + (level[0]/100) + ")";
+    battery_level.style.transform = "scaleY(" + (1 - level[0]/100) + ")";
   }
   var dev;
   var serv;
