@@ -70,7 +70,7 @@
         </svg>
       </div>
     </div>
-    <paper-fab icon="cached"></paper-fab>
+    <paper-fab icon="cached" onclick="readBatteryLevel()"></paper-fab>
   </paper-scroll-header-panel>
   <script>
   var battery_level = document.getElementById("battery-level");
@@ -104,6 +104,11 @@
     }).then(function(value) {
       setBatteryLevel(new Uint8Array(value));
     }).catch(console.log.bind(console));
+  var readBatteryLevel = function() {
+    char.readValue().then(function(value) {
+      setBatteryLevel(new Uint8Array(value));
+    });
+  }
   </script>
 </body>
 
