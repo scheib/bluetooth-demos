@@ -70,7 +70,7 @@
         </svg>
       </div>
     </div>
-    <paper-fab icon="cached" onclick="readBatteryLevel()"></paper-fab>
+    <paper-fab id="refresh-button" icon="cached" onclick="readBatteryLevel()"></paper-fab>
   </paper-scroll-header-panel>
   <script>
   var battery_level = document.getElementById("battery-level");
@@ -108,6 +108,9 @@
     char.readValue().then(function(value) {
       setBatteryLevel(new Uint8Array(value));
     });
+    var button = document.getElementById("refresh-button");
+    button.style.transform = "rotateZ(0deg)";
+    button.style.transform = "rotateZ(1080deg)";
   }
   </script>
 </body>
