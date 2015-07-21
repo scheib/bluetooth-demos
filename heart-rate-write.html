@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Web Bluetooth Demos">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Bluetooth Demos</title>
+
+  <!-- From http://www.google.com/design/spec/style/color.html#color-color-palette -->
+  <!-- Teal 500 -->
+  <meta name="theme-color" content="#009688">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import"
+        href="bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html" rel="import">
+  <link rel="import" href="bower_components/iron-icons/device-icons.html" rel="import">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html" rel="import">
+  <link rel="import" href="bower_components/iron-icon/iron-icon.html" rel="import">
+  <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+
+  <style is="custom-style">
+   paper-toolbar {
+     --paper-toolbar-background: #009688;
+   }
+   paper-fab {
+     --paper-fab-background: #00b8d4;
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+     transition: all 1s;
+   }
+   .my-icon {
+     position: absolute;
+     --iron-icon-width: 100%;
+     --iron-icon-height: 100%;
+   }
+   .top-icon {
+     transition: transform .2s cubic-bezier(0.4, 0.0, 0.2, 1);
+     fill: white;
+     fill-opacity: 0.8;
+     width: 100%;
+   }
+   .container {
+     height: 100%;
+     @apply(--layout-vertical);
+     @apply(--layout-center);
+     @apply(--layout-center-justified);
+   }
+   .icon-container {
+     position: relative;
+     height: 300px;
+     width: 300px;
+   }
+  </style>
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+  <paper-scroll-header-panel class="flex">
+    <paper-toolbar class="tall">
+      <div class="bottom title">Web Bluetooth Heart Rate Write Characteristic Demo</div>
+    </paper-toolbar>
+    <paper-fab id="refresh-button" icon="cached" onclick="resetEnergyExpended()"></paper-fab>
+  </paper-scroll-header-panel>
+  <script>
+  var battery_level = document.getElementById("battery-level");
+  var setBatteryLevel = function(level) {
+    battery_level.style.transform = "scaleY(" + (1 - level[0]/100) + ")";
+  }
+  var dev;
+  var serv;
+  var servi;
+  var char;
+  var temp = 0;
+  function resetEnergyExpended() {
+    console.log("Scanning for devices");
+    navigator.bluetooth.requestDevice({
+      filters: [{ services: ['heart_rate'],
+        }]
+      }).then(function(device) {
+        dev = device;
+        console.log(dev);
+        return device.connectGATT();
+      }).then(function(server) {
+        serv = server;
+        console.log(serv);
+        return server.getPrimaryService('heart_rate');
+      }).then(function(service) {
+        servi = service;
+        console.log(servi);
+        return service.getCharacteristic('heart_rate_control_point');
+      }).then(function(characteristic) {
+        char = characteristic;
+        console.log(char);
+        var arr = new Uint8Array(1);
+        arr[0] = 1; // 1 means reset energy expended value to zero.
+        return characteristic.writeValue(arr);
+      }).then(function(value) {
+        console.log(42);
+      }).catch(function (e) {
+        console.log("oh no");
+        console.log(e)
+      });
+    }
+  </script>
+</body>
+
+</html>
