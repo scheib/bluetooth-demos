@@ -44,6 +44,5 @@
   },
   "_source": "git://github.com/PolymerElements/paper-scroll-header-panel.git",
   "_target": "^1.0.0",
-  "_originalSource": "PolymerElements/paper-scroll-header-panel",
-  "_direct": true
+  "_originalSource": "PolymerElements/paper-scroll-header-panel"
 }
